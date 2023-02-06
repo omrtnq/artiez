@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Base extends Model
 {
+    use HasFactory;
     /**
      * The table associated with the model.
      * 
@@ -35,6 +37,6 @@ class Base extends Model
      */
     public function productTables()
     {
-        return $this->hasMany('App\Models\ProductTable', 'base_id', 'base_id');
+        return $this->hasMany(Product::class, 'base_id', 'base_id');
     }
 }

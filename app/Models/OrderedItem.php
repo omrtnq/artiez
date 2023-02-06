@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property integer $ordered_item_id
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OrderedItem extends Model
 {
+    use HasFactory;
     /**
      * The table associated with the model.
      * 
@@ -36,7 +38,7 @@ class OrderedItem extends Model
      */
     public function productTable()
     {
-        return $this->belongsTo('App\Models\ProductTable', 'product_id', 'product_id');
+        return $this->belongsTo(Product::class, 'product_id', 'product_id');
     }
 
     /**
@@ -44,6 +46,6 @@ class OrderedItem extends Model
      */
     public function transactionTables()
     {
-        return $this->hasMany('App\Models\TransactionTable', 'order_item_id', 'ordered_item_id');
+        return $this->hasMany(Transaction::class, 'order_item_id', 'ordered_item_id');
     }
 }

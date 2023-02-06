@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property integer $payment_method_id
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PaymentMethod extends Model
 {
+    use HasFactory;
     /**
      * The table associated with the model.
      * 
@@ -35,6 +37,6 @@ class PaymentMethod extends Model
      */
     public function transactionTables()
     {
-        return $this->hasMany('App\Models\TransactionTable', 'payment_method_id', 'payment_method_id');
+        return $this->hasMany(Transaction::class, 'payment_method_id', 'payment_method_id');
     }
 }
