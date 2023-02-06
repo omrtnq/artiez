@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property integer $product_id
@@ -29,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
+    use HasFactory;
     /**
      * The table associated with the model.
      * 
@@ -46,14 +48,14 @@ class Product extends Model
     /**
      * @var array
      */
-    protected $fillable = ['artist_id', 'base_id', 'medium_id', 'product_name', 'description', 'length', 'width', 'height', 'date_created', 'art_style', 'coa', 'frame', 'product_preview', 'price', 'is_sculpture', 'sold'];
+    protected $fillable = ['artist_id', 'base_id', 'medium_id', 'product_name', 'description', 'width', 'height', 'date_created', 'art_style', 'coa', 'product_preview', 'price', 'sold'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function orderedItemTables()
     {
-        return $this->hasMany('App\Models\OrderedItemTable', 'product_id', 'product_id');
+        return $this->hasMany(OrderedItem::class, 'product_id', 'product_id');
     }
 
     /**
@@ -61,7 +63,7 @@ class Product extends Model
      */
     public function baseTable()
     {
-        return $this->belongsTo('App\Models\BaseTable', 'base_id', 'base_id');
+        return $this->belongsTo(Base::class, 'base_id', 'base_id');
     }
 
     /**
@@ -69,7 +71,7 @@ class Product extends Model
      */
     public function artistTable()
     {
-        return $this->belongsTo('App\Models\ArtistTable', 'artist_id', 'artist_id');
+        return $this->belongsTo(Artist::class, 'artist_id', 'artist_id');
     }
 
     /**
@@ -77,6 +79,6 @@ class Product extends Model
      */
     public function mediumTable()
     {
-        return $this->belongsTo('App\Models\MediumTable', 'medium_id', 'medium_id');
+        return $this->belongsTo(Medium::class, 'medium_id', 'medium_id');
     }
 }

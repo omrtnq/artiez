@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property integer $transaction_id
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Transaction extends Model
 {
+    use HasFactory;
     /**
      * The table associated with the model.
      * 
@@ -41,7 +43,7 @@ class Transaction extends Model
      */
     public function paymentMethodTable()
     {
-        return $this->belongsTo('App\Models\PaymentMethodTable', 'payment_method_id', 'payment_method_id');
+        return $this->belongsTo(PaymentMethod::class, 'payment_method_id', 'payment_method_id');
     }
 
     /**
@@ -49,7 +51,7 @@ class Transaction extends Model
      */
     public function orderedItemTable()
     {
-        return $this->belongsTo('App\Models\OrderedItemTable', 'order_item_id', 'ordered_item_id');
+        return $this->belongsTo(OrderedItem::class, 'order_item_id', 'ordered_item_id');
     }
 
     /**
@@ -57,6 +59,6 @@ class Transaction extends Model
      */
     public function buyerTable()
     {
-        return $this->belongsTo('App\Models\BuyerTable', 'buyer_id', 'buyer_id');
+        return $this->belongsTo(Buyer::class, 'buyer_id', 'buyer_id');
     }
 }

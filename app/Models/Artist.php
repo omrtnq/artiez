@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Artist extends Model
 {
+    use HasFactory;
     /**
      * The table associated with the model.
      * 
@@ -35,29 +37,14 @@ class Artist extends Model
     /**
      * @var array
      */
-    protected $fillable = ['email', 'address_id', 'last_name', 'first_name', 'contact_number', 'open_for_commission'];
+    protected $fillable = ['last_name', 'first_name', 'contact_number', 'email', 'pass', 'street_address', 'district', 'barangay', 'city', 'province', 'postal_code', 'open_for_commission'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function signInCredetial()
-    {
-        return $this->belongsTo('App\Models\SignInCredetial', 'email', 'email');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function addressTable()
-    {
-        return $this->belongsTo('App\Models\AddressTable', 'address_id', 'address_id');
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function productTables()
     {
-        return $this->hasMany('App\Models\ProductTable', 'artist_id', 'artist_id');
+        return $this->hasMany(Product::class, 'artist_id', 'artist_id');
     }
 }

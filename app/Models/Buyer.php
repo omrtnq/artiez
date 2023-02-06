@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Buyer extends Model
 {
+    use HasFactory;
     /**
      * The table associated with the model.
      * 
@@ -34,29 +36,13 @@ class Buyer extends Model
     /**
      * @var array
      */
-    protected $fillable = ['email', 'address_id', 'last_name', 'first_name', 'contact_number'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function addressTable()
-    {
-        return $this->belongsTo('App\Models\AddressTable', 'address_id', 'address_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function signInCredetial()
-    {
-        return $this->belongsTo('App\Models\SignInCredetial', 'email', 'email');
-    }
+    protected $fillable = ['last_name', 'first_name', 'contact_number', 'email', 'pass', 'street_address', 'district', 'barangay', 'city', 'province', 'postal_code',];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function transactionTables()
     {
-        return $this->hasMany('App\Models\TransactionTable', 'buyer_id', 'buyer_id');
+        return $this->hasMany(Transaction::class, 'buyer_id', 'buyer_id');
     }
 }
