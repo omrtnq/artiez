@@ -37,7 +37,21 @@ class Artist extends Model
     /**
      * @var array
      */
-    protected $fillable = ['last_name', 'first_name', 'contact_number', 'email', 'pass', 'street_address', 'district', 'barangay', 'city', 'province', 'postal_code', 'open_for_commission'];
+    protected $fillable = 
+    [
+    'last_name',
+     'first_name',
+      'contact_number',
+       'email',
+        'pass',
+         'street_address',
+          'district',
+           'barangay',
+            'city',
+             'province',
+              'postal_code',
+               'open_for_commission'
+            ];
 
 
     /**

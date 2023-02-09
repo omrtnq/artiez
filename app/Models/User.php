@@ -3,10 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+     'last_name',
+     'first_name',
+     'contact_number', 
+     'email', 
+     'pass', 
+     'street_address', 
+     'district', 
+     'barangay', 
+     'city', 
+     'province', 
+     'postal_code',
     ];
 
     /**
@@ -41,4 +50,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //creating the roles/ giving them attributes to access easier
+    protected function role():Attribute
+    {
+        return new Attribute(
+            get: fn($value) => ["buyer", "artist"][$value]
+        );
+    }
 }

@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\Authenticatable as AuthAuthenticatable;
 use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Facades\Hash;
+
 
 /**
  * @property integer $buyer_id
@@ -16,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property SignInCredetial $signInCredetial
  * @property TransactionTable[] $transactionTables
  */
-class Buyer extends Model
+class Buyer extends  Authenticatable
 {
     use HasFactory;
     /**
@@ -36,7 +41,19 @@ class Buyer extends Model
     /**
      * @var array
      */
-    protected $fillable = ['last_name', 'first_name', 'contact_number', 'email', 'pass', 'street_address', 'district', 'barangay', 'city', 'province', 'postal_code',];
+    protected $fillable = [
+    'last_name',
+     'first_name',
+     'contact_number', 
+     'email', 
+     'pass', 
+     'street_address', 
+     'district', 
+     'barangay', 
+     'city', 
+     'province', 
+     'postal_code',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -45,4 +62,6 @@ class Buyer extends Model
     {
         return $this->hasMany(Transaction::class, 'buyer_id', 'buyer_id');
     }
+
+    
 }
